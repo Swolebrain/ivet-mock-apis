@@ -15,7 +15,6 @@ import static spark.Spark.*;
 public class Main {
     public static void main (String[] a){
         initExceptionHandler((e) -> System.out.println("Server initialization failed"));
-        port(9000);
 
         get("/", (req, res) -> rootHandler(req));
 
