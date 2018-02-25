@@ -2,7 +2,7 @@
   <artifact type="jar" build-on-make="true" name="RestTest2:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/RestTest2_jar</output-path>
     <root id="archive" name="RestTest2.jar">
-      <element id="module-output" name="RestTest2" />
+      <element id="module-output" name="ivet-mock-apis" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-xml/9.4.6.v20170531/jetty-xml-9.4.6.v20170531.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/sql2o/sql2o/1.5.4/sql2o-1.5.4.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.13/slf4j-api-1.7.13.jar" path-in-jar="/" />

@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ivet-mock-apis" />
         <module name="RestTest2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
+      <module name="ivet-mock-apis" target="1.8" />
       <module name="RestTest2" target="1.8" />
     </bytecodeTargetLevel>
   </component>

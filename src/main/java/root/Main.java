@@ -8,6 +8,7 @@ import spark.Request;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Date;
 import java.util.List;
 
 import static spark.Spark.*;
@@ -15,6 +16,7 @@ import static spark.Spark.*;
 public class Main {
     public static void main (String[] a){
         initExceptionHandler((e) -> System.out.println("Server initialization failed"));
+        System.out.println(new Date(System.currentTimeMillis()));
 
         get("/", (req, res) -> rootHandler(req));
 

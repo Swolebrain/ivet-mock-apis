@@ -2,11 +2,13 @@ package models;
 
 import lombok.Data;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Data
-public class Event {
+public class Event implements Comparable<Event> {
     private int id;
     private int zip;
     private String startDate;
@@ -34,14 +36,17 @@ public class Event {
         Random r = new Random();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         SimpleDateFormat sdfHour = new SimpleDateFormat("h:mm a");
-        long pageNumOffset = 1000*60*60*24*pageNum*10; //offset the date of the event by 5*pageNum. So events on page 2 are all 5 days from now
+        long pageNumOffset = 0; // 1000L*60L*60L*24L*((long)(pageNum *r.nextInt(6)+1L));
 
-        this.id = r.nextInt();
-        this.zip = r.nextInt(8999 + 1000);
-        long start =  System.currentTimeMillis() + pageNumOffset + 1000*60*60*r.nextInt(96);
+        this.id = r.nextInt(Integer.MAX_VALUE);
+        this.zip = r.nextInt(8999)+ 1000;
+        long start =  System.currentTimeMillis() + pageNumOffset + 1000L*60L*60L*((long)(r.nextInt(150*24))+1L);
+        System.out.println(
+                System.currentTimeMillis() + " + " + pageNumOffset +
+                " -> " + start + " -> " + new Date(start));
         this.startDate = sdf.format(new Date(start));
         this.state = "FL";
-        this.eventTitle = "Mock event title "+r.nextInt();
+        this.eventTitle = "Mock event title "+r.nextInt(Integer.MAX_VALUE);
         this.address1 = "123 thug rd";
         this.address2 = null;
         long endDate = start + 1000*60*60*3;
@@ -112,4 +117,31 @@ public class Event {
         this.files = (File[]) files.toArray();
     }
 
+
+    @Override
+    public int compareTo(Event other) {
+        SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            int compareByDay = df.parse(startDate).compareTo(df.parse(other.startDate));
+            if (compareByDay != 0) return compareByDay;
+        }
+        catch (ParseException e){
+            System.err.println(e.toString());
+        }
+        int thisHour = Integer.parseInt(startTime.split(":")[0]);
+        int thisMinute = Integer.parseInt(startTime.split(":")[1].split(" ")[0]);
+        String thisAm = startTime.split(":")[1].split(" ")[1];
+        if (thisAm == "PM") thisHour += 12;
+        Date thisDate = new Date();
+        Date otherDate = new Date();
+        thisDate.setHours(thisHour);
+        thisDate.setMinutes(thisMinute);
+        int otherHour = Integer.parseInt(other.startTime.split(":")[0]);
+        int otherMinute = Integer.parseInt(other.startTime.split(":")[1].split(" ")[0]);
+        String otherAm = other.startTime.split(":")[1].split(" ")[1];
+        if (otherAm == "PM") otherHour += 12;
+        otherDate.setHours(otherHour);
+        otherDate.setMinutes(otherMinute);
+        return thisDate.compareTo(otherDate);
+    }
 }

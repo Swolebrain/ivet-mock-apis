@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RestTest2.iml" filepath="$PROJECT_DIR$/RestTest2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ivet-mock-apis.iml" filepath="$PROJECT_DIR$/ivet-mock-apis.iml" />
     </modules>
   </component>
 </project>
