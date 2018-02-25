@@ -8,7 +8,6 @@ import spark.Request;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Arrays;
 import java.util.List;
 
 import static spark.Spark.*;
