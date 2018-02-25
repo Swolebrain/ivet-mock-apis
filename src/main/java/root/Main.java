@@ -1,4 +1,4 @@
-
+package root;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -15,6 +15,7 @@ import static spark.Spark.*;
 public class Main {
     public static void main (String[] a){
         initExceptionHandler((e) -> System.out.println("Server initialization failed"));
+        port(9000);
 
         get("/", (req, res) -> rootHandler(req));
 
@@ -32,7 +33,13 @@ public class Main {
     private static String getEvents(Request req){
         String page = req.queryParams("page");
         if (page == null) page = "1";
-        int pageRequested = Integer.parseInt(page);
+        int pageRequested = 1;
+        try{
+            pageRequested = Integer.parseInt(page);
+        }
+        catch (NumberFormatException e){
+            System.err.println(e.toString());
+        }
         List<Event> eventPage = DummyData.eventPages.get(pageRequested);
         return dataToJson(eventPage);
     }
